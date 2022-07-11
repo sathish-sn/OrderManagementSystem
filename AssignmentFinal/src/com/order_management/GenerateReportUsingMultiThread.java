@@ -3,7 +3,7 @@ package com.order_management;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class GenerateReportUsingMultiThread implements Runnable {
+public class GenerateReportUsingMultiThread implements Runnable , orderManagement{
 	Scanner scan = new Scanner(System.in);
 	Methods object = new Methods();
 	@Override
