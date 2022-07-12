@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -20,7 +21,7 @@ import java.util.StringTokenizer;
 interface OrderManagement {
 
 	public class Methods {
-		static DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
+		static DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
 		static Date now = new Date();
 		private static final String filePath = "C:/Users/Sathisha Narayana/Desktop/OrderManagement.txt";
 		private static String path = null;
@@ -191,12 +192,12 @@ interface OrderManagement {
 				}
 
 				LocalDateTime orderDate = LocalDateTime.now();
-				System.out.println("order time = " + dtf.format(new Date()));
+				System.out.println("order time = " + dateTimeFormat.format(new Date()));
 
 				Calendar getDateTime = Calendar.getInstance();
 				getDateTime.setTime(new Date()); // Using today's date
 				getDateTime.add(Calendar.DATE, 5); // Adding 5 days
-				String deliveryDateTime = dtf.format(getDateTime.getTime());
+				String deliveryDateTime = dateTimeFormat.format(getDateTime.getTime());
 				System.out.println("Delivery Time = " + deliveryDateTime);
 				System.out.println("Order stuts : In_Progress");
 				String status = "In_Progress";
@@ -439,7 +440,7 @@ interface OrderManagement {
 					if (getValue.getOrderID().equals(markAsDel)) {
 
 						getValue.setStatus("Delivered");
-						getValue.setDeliveryDateTime(dtf.format(new Date()));
+						getValue.setDeliveryDateTime(dateTimeFormat.format(new Date()));
 						System.out.println(viewList);
 						System.out.println("order marked as delivered Successfully ");
 						flag = 0;
@@ -544,7 +545,8 @@ interface OrderManagement {
 			try {
 				String filename, filename1;
 
-				filename1 = new SimpleDateFormat("yyyy-MMdd-HHmm'.txt'").format(new Date());
+			filename1 = new SimpleDateFormat("yyyy-MMdd-HHmm-ss'.txt'").format(new Date());
+			//	fliename1 = LocalDateTime.parse("yyyy-MMdd-HHmm'.txt'").Format(new Date(), DateTimeFormatter.ISO_DATE_TIME);
 				filename = "Order_Report_" + filename1;
 				File file = new File("C://Users//Sathisha Narayana//Desktop//Reports//" + filename);
 				boolean value = file.createNewFile();

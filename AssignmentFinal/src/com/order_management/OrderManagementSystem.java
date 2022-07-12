@@ -84,12 +84,32 @@ public class OrderManagementSystem implements OrderManagement {
 					object.CancleById();
 					break;
 				case 8:System.out.println("choose 1 or 2");
-					int number = scan.nextInt();
-					switch(number) {
-					case 1 : Test t1 = new Test();
-							t1.start();
-						Test1 t2 = t1.new Test1();
-						t2.start();
+				int flag2 = 1;
+			outer :	while(flag2 ==1) {
+				int flag1 =1;
+				int option = 0;
+				inner: while (flag1 == 1) 
+					try {
+						option = scan.nextInt();
+						break inner;
+					} catch (Exception e) {
+						System.out.println("choose valid option");
+//		e.printStackTrace();;
+						scan.nextLine();
+						continue outer;
+					}
+				if (option < 1 || option > 2) {
+					System.out.println("please enter the valid option");
+					
+				}
+				
+					//int number = scan.nextInt();
+					switch(option) {
+					case 1 : Test allReport = new Test();
+					allReport.start();
+						Test1 threadAll2= allReport.new Test1();
+						threadAll2.start();
+						flag2=0;
 					break;
 					case 2 : System.out.println("******** Choose Status********* ");
 					System.out.println("         1).InProgress			");
@@ -99,28 +119,30 @@ public class OrderManagementSystem implements OrderManagement {
 					switch(choice) {
 						
 					case 1:	Test threadObject = new Test();
-							com.order_management.Test.Test2 inProgress = threadObject.new Test2();
-							inProgress.run();
-							com.order_management.Test.Test3 d3 = threadObject.new Test3();
-							inProgress.run();
+							com.order_management.Test.Test2 thread2 = threadObject.new Test2();
+							thread2.start();
+							com.order_management.Test.Test3 thread3 = threadObject.new Test3();
+							thread3.start();
 							break;
 					case 2: 
 						Test  deivered= new Test();
 						com.order_management.Test.Test4 thread4= deivered.new Test4();
-						thread4.run();
+						thread4.start();
 						com.order_management.Test.Test5 thread5 = deivered.new Test5();
-						thread5.run();
+						thread5.start();
 						break;
 					case 3: 
 						Test  cancelled= new Test();
 						com.order_management.Test.Test6 thread6= cancelled.new Test6();
-						thread6.run();
+						thread6.start();
 						com.order_management.Test.Test7 thread7 = cancelled.new Test7();
-						thread7.run();
+						thread7.start();
 						break;
 							
 					}
 					}
+					flag2 =0;
+			}
 					break;
 				case 9:
 					System.out.println("Updating Current Order Details.........");

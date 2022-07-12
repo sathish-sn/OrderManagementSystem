@@ -1,60 +1,63 @@
-package com.order_management;
-
-import java.io.IOException;
-import java.util.Scanner;
-
-public class GenerateReportUsingMultiThread implements Runnable , orderManagement{
-	Scanner scan = new Scanner(System.in);
-	Methods object = new Methods();
-	@Override
-	public void run() {
-		System.out.println(" ******** Choose Report Generation Option ********* ");
-		System.out.println("                1).Export All                       ");
-		System.out.println("                2).By Status ");
-		int choice = scan.nextInt();
-		switch(choice) {
-		case 1:
-			try {
-				object.GenReport();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			break;
-		case 2:
-			System.out.println("******** Choose Status********* ");
-			System.out.println("         1).InProgress			");
-			System.out.println("         2).Delivered 			");
-			System.out.println("         3).Cancelled		    ");
-			int makeChoice = scan.nextInt();
-			switch(makeChoice) {
-			case 1:
-				try {
-					Methods.byStatus("In_Progress");
-					System.out.println("Report genarated succussfully");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			case 2:
-				try {
-					Methods.byStatus("Delivered");
-					System.out.println("Report genarated succussfully");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			case 3:
-				try {
-					Methods.byStatus("Cancelled");
-					System.out.println("Report genarated succussfully");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			
-			}
-			
-		}
-	}
-
-}
+//package com.order_management;
+//
+//import java.io.BufferedWriter;
+//import java.io.FileNotFoundException;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import java.io.PrintWriter;
+//import java.io.Writer;
+//import java.util.ArrayList;
+//import java.util.Scanner;
+//
+//import com.order_management.OrderManagement.Methods;
+//
+//public  class GenerateReportUsingMultiThread implements Runnable , OrderManagement{
+//	static ArrayList<Order> data1 = new  ArrayList<Order>();
+//	static ArrayList<Order> data2 = new  ArrayList<Order>();
+//	ArrayList<Order> data = Methods.getOrderList();
+//	static	String path2 = "C:\\Users\\Sathisha Narayana\\Desktop\\GenaralReport.txt";
+//	Scanner scan = new Scanner(System.in);
+//	Methods object = new Methods();
+//	//ArrayList<Order> data = Methods.getOrderList();
+//	
+//
+//	@Override
+//	public void run() {
+//		
+//		for(int i=0; i<data.size()/2; i++) {
+//			data1.add(data.get(i));
+//		}
+//
+//		
+//	
+//		FileWriter writer = null;
+//		PrintWriter writer1;
+//		
+//		try {
+//			writer1 = new PrintWriter(path2);
+//		
+//	//	writer1.print("");
+//		
+//
+//		 writer = new FileWriter(path2, true);
+//		Writer write = new BufferedWriter(writer);
+//	}catch (IOException e1) {
+//		// TODO Auto-generated catch block
+//		e1.printStackTrace();
+//	}
+//		try {
+//			for (int i = 0; i < data.size(); i++) {
+//				writer.write(data1.get(i).toString() + "\n");
+//			}
+//			writer.close();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("Report generated successfully");
+//	
+//	
+//	}
+//	
+//
+//}

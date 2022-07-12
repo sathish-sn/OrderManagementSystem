@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import com.order_management.OrderManagement.Methods;
 
-public class Test extends Thread implements OrderManagement,Runnable{
+public class Test extends Thread implements OrderManagement{
 	
 	static ArrayList<Order> data1 = new ArrayList<Order>();
 	static ArrayList<Order> data2 = new ArrayList<Order>();
