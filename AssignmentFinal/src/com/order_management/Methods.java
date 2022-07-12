@@ -16,7 +16,8 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-interface orderManagement {
+
+interface OrderManagement {
 
 	public class Methods {
 		static DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss");
@@ -31,11 +32,11 @@ interface orderManagement {
 				File file = new File(filePath);
 				Scanner readfile = new Scanner(file);
 				StringTokenizer token = null; //
-				DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd'@'HH:mm:ss");
+				DateFormat dateTimeFormat = new SimpleDateFormat("yyyy/MM/dd'@'HH:mm:ss");
 				Calendar getDateTime = Calendar.getInstance();
 				getDateTime.setTime(new Date()); // Using today's date
 				getDateTime.add(Calendar.DATE, 5); // Adding 5 days
-				String output = dtf.format(getDateTime.getTime());
+				String output = dateTimeFormat.format(getDateTime.getTime());
 
 				String orderId = "";
 				String orderDescription = "";
@@ -139,7 +140,7 @@ interface orderManagement {
 
 		}
 
-		public void Add_order() throws IOException {
+		public void addOrder() throws IOException {
 			Scanner scan = new Scanner(System.in);
 			int flag = 1;
 			outer: while (flag == 1) {
@@ -210,32 +211,39 @@ interface orderManagement {
 				flag = 0;
 			}
 			System.out.println("Do you want to enter more order details(Y/N)");
+			boolean getOption = true;
+			outer: while(getOption) {
 			String charecter = scan.next();
-			if (charecter.charAt(0) == 'y' || charecter.charAt(0) == 'Y') {
-				// list.clear();
-				Add_order();
+			
+			if (charecter.equalsIgnoreCase("y")) {
+				
+				addOrder();
 
-			} else if (charecter.charAt(0) == 'n' || charecter.charAt(0) == 'N') {
+			} else if (charecter.equalsIgnoreCase("n")) {
 				return;
 			}
-
+			else {
+				System.out.println(" choose the valid option");
+				continue outer;
+			}
+			}
 		}
 
-//	public void ViewOrderList() {
-//		ArrayList<Order> viewList;
-//		
-//		try {
-//			viewList = Methods.getOrderList();
-//			for (Order x : viewList) {
-//
-//				System.out.println(x.getOrderID()  + x.getOrderDescription()  + x.getDeliveryAddress()
-//						 + x.getAmount()  + x.getOrderDate()   + x.getDeliveryDateTime()  
-//						+ x.getStatus());
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void ViewOrderList() {
+		ArrayList<Order> viewList;
+		
+		try {
+			viewList = Methods.getOrderList();
+			for (Order x : viewList) {
+
+				System.out.println(x.getOrderID()  + x.getOrderDescription()  + x.getDeliveryAddress()
+						 + x.getAmount()  + x.getOrderDate()   + x.getDeliveryDateTime()  
+						+ x.getStatus());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 		public int ViewOrderList(String id) {
 
@@ -370,14 +378,23 @@ interface orderManagement {
 				flag = 0;
 			}
 			System.out.println("Do you want to delete another order(Y/N) ");
-			String ch1 = scan.next();
-			if (ch1.equalsIgnoreCase("y")) {
+			boolean getOption = true;
+			outer: while(getOption) {
+			String charecter = scan.next();
+			
+			if (charecter.equalsIgnoreCase("y")) {
+				
 				DeleteById();
-			} else if (ch1.equalsIgnoreCase("n")) {
-				main1();
 
+			} else if (charecter.equalsIgnoreCase("n")) {
+				break;
 			}
-
+			else {
+				System.out.println(" choose the valid option");
+				continue outer;
+			}
+			}
+			return;
 		}
 
 		private void main1() {
@@ -436,12 +453,23 @@ interface orderManagement {
 				writeToFile(viewList);
 			}
 			System.out.println("Do you want to mark another order(Y/N) as delivered");
-			String ch1 = scan.next();
-			if (ch1.equalsIgnoreCase("y")) {
+			boolean getOption = true;
+			outer: while(getOption) {
+			String charecter = scan.next();
+			
+			if (charecter.equalsIgnoreCase("y")) {
+				
 				MarkAsDel();
-			} else if (ch1.equalsIgnoreCase("n")) {
-				return;
+
+			} else if (charecter.equalsIgnoreCase("n")) {
+				break;
 			}
+			else {
+				System.out.println(" choose the valid option");
+				continue outer;
+			}
+			}
+			return;
 
 		}
 
@@ -492,12 +520,23 @@ interface orderManagement {
 				flag = 0;
 			}
 			System.out.println("Do you want to mark another order(Y/N) as delivered");
-			String ch1 = scan.next();
-			if (ch1.equalsIgnoreCase("y")) {
+			boolean getOption = true;
+			outer: while(getOption) {
+			String charecter = scan.next();
+			
+			if (charecter.equalsIgnoreCase("y")) {
+				
 				CancleById();
-			} else if (ch1.equalsIgnoreCase("n")) {
-				return;
+
+			} else if (charecter.equalsIgnoreCase("n")) {
+				break;
 			}
+			else {
+				System.out.println(" choose the valid option");
+				continue outer;
+			}
+			}
+			return;
 
 		}
 
@@ -523,11 +562,22 @@ interface orderManagement {
 		}
 
 		public void GenReport() throws IOException {
+			
 			String path2 = "C:\\Users\\Sathisha Narayana\\Desktop\\GenaralReport.txt";
 			ArrayList<Order> data = Methods.getOrderList();
 			createFileStamp();
+			ArrayList<Order> data1 = new  ArrayList<Order>();
+			ArrayList<Order> data2 = new  ArrayList<Order>();
+			for(int i=0; i<data.size()/2; i++) {
+				data1.add(data.get(i));
+			}
+			for(int i=data.size()/2; i<data.size(); i++) {
+				data1.add(data.get(i));
+			}
+			
 			PrintWriter writer1 = new PrintWriter(path2);
 			writer1.print("");
+			
 
 			FileWriter writer = new FileWriter(path2, true);
 			Writer write = new BufferedWriter(writer);
@@ -541,7 +591,6 @@ interface orderManagement {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			// System.out.println("C:/Users/Sathisha Narayana/Desktop/OrderManagement.txt");
 			System.out.println("Report generated successfully");
 		}
 

@@ -5,64 +5,99 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class SortFuction implements Comparator, orderManagement {
+public class SortFuction implements Comparator, OrderManagement {
 	static Scanner scan = new Scanner(System.in);
 
 	public void sortByOrderId() {
-		System.out.println("******** Choose Sort Order *********");
-		System.out.println("            1).Ascending            ");
-		System.out.println("            2).Descending             ");
-		System.out.println("Choose option");
-
-		int option = scan.nextInt();
-
-		switch (option) {
-		case 1:
-			class ascendingID implements Comparator<Order> {
-				@Override
-				public int compare(Order a, Order b) {
-					return a.getOrderID().compareTo(b.getOrderID());
+		int flag = 1;
+		outer: while (flag == 1) {
+			System.out.println("******** Choose Sort Order *********");
+			System.out.println("            1).Ascending            ");
+			System.out.println("            2).Descending             ");
+			System.out.println("Choose option");
+			int option = 0;
+			int flag1 = 1;
+			inner: while (flag1 == 1)
+				try {
+					option = scan.nextInt();
+					break inner;
+				} catch (Exception e) {
+					System.out.println("choose valid option");
+//	e.printStackTrace();;
+					scan.nextLine();
+					continue inner;
 				}
+			if (option < 1 || option > 2) {
+				System.out.println("please enter the valid option");
+				continue outer;
 			}
-			ArrayList<Order> getList = Methods.getOrderList();
-			Collections.sort(getList, new ascendingID());
-			System.out.println(
-					"------------------------------------------------------------------------------------------------------------------------------------------------------");
-			for (int i = 0; i < getList.size(); i++) {
-				System.out.println(getList.get(i));
-			}
-			System.out.println();
-			System.out.println("Successfully Sorted by order ID  in ascending Order\n");
-			break;
-		case 2:
-			class descendingID implements Comparator<Order> {
-				@Override
-				public int compare(Order a, Order b) {
-					return b.getOrderID().compareTo(a.getOrderID());
+			switch (option) {
+			case 1:
+				class ascendingID implements Comparator<Order> {
+					@Override
+					public int compare(Order a, Order b) {
+						return a.getOrderID().compareTo(b.getOrderID());
+					}
 				}
-			}
-			ArrayList<Order> getList1 = Methods.getOrderList();
-			Collections.sort(getList1, new descendingID());
-			System.out.println(
-					"------------------------------------------------------------------------------------------------------------------------------------------------------");
-			for (int i = 0; i < getList1.size(); i++) {
-				System.out.println(getList1.get(i));
-			}
-			System.out.println();
-			System.out.println("Successfully Sorted by order ID in descending Order\n");
-			break;
+				ArrayList<Order> getList = Methods.getOrderList();
+				Collections.sort(getList, new ascendingID());
+				System.out.println(
+						"------------------------------------------------------------------------------------------------------------------------------------------------------");
+				for (int i = 0; i < getList.size(); i++) {
+					System.out.println(getList.get(i));
+				}
+				System.out.println();
+				System.out.println("Successfully Sorted by order ID  in ascending Order\n");
+				break;
+			case 2:
+				class descendingID implements Comparator<Order> {
+					@Override
+					public int compare(Order a, Order b) {
+						return b.getOrderID().compareTo(a.getOrderID());
+					}
+				}
+				ArrayList<Order> getList1 = Methods.getOrderList();
+				Collections.sort(getList1, new descendingID());
+				System.out.println(
+						"------------------------------------------------------------------------------------------------------------------------------------------------------");
+				for (int i = 0; i < getList1.size(); i++) {
+					System.out.println(getList1.get(i));
+				}
+				System.out.println();
+				System.out.println("Successfully Sorted by order ID in descending Order\n");
+				break;
 
-		default:
-			break;
+			default:
+				break;
+
+			}
+			flag = 0;
 		}
 	}
 
 	public void sortByAmount() {
+		int flag = 1;
+	outer:	while(flag == 1) {
 		System.out.println("******** Choose Sort Order *********");
 		System.out.println("            1).Ascending            ");
 		System.out.println("            2).Descending             ");
 		System.out.println("Choose option");
-		int option = scan.nextInt();
+		int option = 0;
+		int flag1 = 1;
+		inner: while (flag1 == 1)
+			try {
+				option = scan.nextInt();
+				break inner;
+			} catch (Exception e) {
+				System.out.println("choose valid option");
+//e.printStackTrace();;
+				scan.nextLine();
+				continue inner;
+			}
+		if (option < 1 || option > 2) {
+			System.out.println("please enter the valid option");
+			continue outer;
+		}
 		switch (option) {
 		case 1:
 			class ascendingAmount implements Comparator<Order> {
@@ -102,14 +137,31 @@ public class SortFuction implements Comparator, orderManagement {
 		default:
 			break;
 		}
+		flag = 0;
 	}
-
+	}
 	public void sortByDescription() {
+		int flag = 1;
+	outer:	while(flag == 1) {
 		System.out.println("******** Choose Sort Order *********");
 		System.out.println("            1).Ascending            ");
 		System.out.println("            2).Descending             ");
 		System.out.println("Choose option");
-		int option = scan.nextInt();
+		int option = 0;
+		int flag1 = 1;
+		inner: while (flag1 == 1)
+			try {
+				option = scan.nextInt();
+				break inner;
+			} catch (Exception e) {
+				System.out.println("choose valid option");
+				scan.nextLine();
+				continue inner;
+			}
+		if (option < 1 || option > 2) {
+			System.out.println("please enter the valid option");
+			continue outer;
+		}
 		switch (option) {
 		case 1:
 			class ascendingDesc implements Comparator<Order> {
@@ -149,14 +201,31 @@ public class SortFuction implements Comparator, orderManagement {
 		default:
 			break;
 		}
+		flag = 0;
 	}
-
+	}
 	public void sortByDeliverAdress() {
+		int flag = 1;
+outer:	while(flag == 1) {
 		System.out.println("******** Choose Sort Order *********");
 		System.out.println("            1).Ascending            ");
 		System.out.println("            2).Descending             ");
 		System.out.println("Choose option");
-		int option = scan.nextInt();
+		int option = 0;
+		int flag1 = 1;
+		inner: while (flag1 == 1)
+			try {
+				option = scan.nextInt();
+				break inner;
+			} catch (Exception e) {
+				System.out.println("choose valid option");
+				scan.nextLine();
+				continue inner;
+			}
+		if (option < 1 || option > 2) {
+			System.out.println("please enter the valid option");
+			continue outer;
+		}
 		switch (option) {
 		case 1:
 			class ascendingDeliveryAdress implements Comparator<Order> {
@@ -196,14 +265,32 @@ public class SortFuction implements Comparator, orderManagement {
 		default:
 			break;
 		}
+		flag = 0;
+	}
 	}
 
 	public void sortByOrderDate() {
+		int flag = 1;
+	outer:	while(flag == 1) {
 		System.out.println("******** Choose Sort Order *********");
 		System.out.println("            1).Ascending            ");
 		System.out.println("            2).Descending             ");
 		System.out.println("Choose option");
-		int option = scan.nextInt();
+		int option = 0;
+		int flag1 = 1;
+		inner: while (flag1 == 1)
+			try {
+				option = scan.nextInt();
+				break inner;
+			} catch (Exception e) {
+				System.out.println("choose valid option");
+				scan.nextLine();
+				continue inner;
+			}
+		if (option < 1 || option > 2) {
+			System.out.println("please enter the valid option");
+			continue outer;
+		}
 		switch (option) {
 		case 1:
 			class ascendingOrderDate implements Comparator<Order> {
@@ -243,15 +330,33 @@ public class SortFuction implements Comparator, orderManagement {
 		default:
 			break;
 		}
+		flag = 0;
+	}
 	}
 
 	public void sortByDeliverDate() {
+		int flag = 1;
+	outer:	while(flag == 1) {
 		System.out.println("******** Choose Sort Order *********");
 		System.out.println("            1).Ascending            ");
 		System.out.println("            2).Descending             ");
 		System.out.println("Choose option");
+		int option = 0;
+		int flag1 = 1;
+		inner: while (flag1 == 1)
+			try {
+				option = scan.nextInt();
+				break inner;
+			} catch (Exception e) {
+				System.out.println("choose valid option");
+				scan.nextLine();
+				continue inner;
+			}
+		if (option < 1 || option > 2) {
+			System.out.println("please enter the valid option");
+			continue outer;
+		}
 
-		int option = scan.nextInt();
 		switch (option) {
 		case 1:
 			class ascendingByDeliverDate implements Comparator<Order> {
@@ -291,8 +396,9 @@ public class SortFuction implements Comparator, orderManagement {
 		default:
 			break;
 		}
+		flag = 0;
 	}
-
+	}
 	@Override
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub

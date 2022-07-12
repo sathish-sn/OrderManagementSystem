@@ -8,7 +8,7 @@ class Order implements Serializable {
 	private String orderDescription;
 	private String deliveryAddress;
 	private LocalDateTime orderDate;
-	private Double Amount;
+	private Double amount;
 	private String deliveryDateTime;
 	private String status;
 
@@ -45,11 +45,11 @@ class Order implements Serializable {
 	}
 
 	public Double getAmount() {
-		return Amount;
+		return amount;
 	}
 
 	public void setAmount(Double amount) {
-		Amount = amount;
+		amount = amount;
 	}
 
 	public String getDeliveryDateTime() {
@@ -70,7 +70,7 @@ class Order implements Serializable {
 
 	@Override
 	public String toString() {
-		return orderID + "\t" + orderDescription + "\t\t" + deliveryAddress + "\t" + orderDate + "\t\t\t" + Amount
+		return orderID + "\t" + orderDescription + "\t\t" + deliveryAddress + "\t" + orderDate + "\t\t\t" + amount
 				+ "\t" + status + "\t" + deliveryDateTime;
 	}
 
@@ -81,7 +81,7 @@ class Order implements Serializable {
 		this.orderDescription = orderDescription;
 		this.deliveryAddress = deliveryAddress;
 		this.orderDate = orderDate;
-		this.Amount = amount;
+		this.amount = amount;
 		this.deliveryDateTime = deliveryDatetime;
 		this.status = status;
 
